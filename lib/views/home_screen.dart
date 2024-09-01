@@ -1,6 +1,10 @@
 // ignore_for_file: file_names, unused_local_variable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:weather_app_getx/models/custom_cards.dart';
+import 'package:weather_app_getx/views/details_page.dart';
+import 'package:weather_app_getx/views/explore_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
         backgroundColor: Colors.blue[50],
         leading: Container(
@@ -65,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: height,
                   child: Column(
                     children: [
-                      SizedBox(height: height * .05),
+                      SizedBox(height: height * .03),
                       SizedBox(
                         width: width,
                         height: height * .3,
@@ -140,10 +145,84 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child:
-                            Container(), // Placeholder for additional content
+                      SizedBox(
+                        height: height * .03,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Top trips",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              const ExplorePage()));
+                                },
+                                child: const Row(
+                                  children: [
+                                    Text(
+                                      'Explore',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey),
+                                    ),
+                                    Icon(Icons.keyboard_arrow_right)
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(height: height * .015),
+                      SizedBox(
+                        width: width,
+                        child: SingleChildScrollView(
+                          physics: const ClampingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () => Get.to(const DetailsPage()),
+                                child: CustomCard(
+                                    price: '230',
+                                    location: "Lorem Ipsum",
+                                    width: width,
+                                    height: height,
+                                    image: 'assets/images/5.jpg'),
+                              ),
+                              GestureDetector(
+                                  onTap: () => Get.to(const DetailsPage()),
+                                  child: CustomCard(
+                                      price: '720',
+                                      location: "Shri Lanka",
+                                      width: width,
+                                      height: height,
+                                      image: 'assets/images/6.jpg')),
+                              GestureDetector(
+                                onTap: () => Get.to(const DetailsPage()),
+                                child: CustomCard(
+                                    price: '560',
+                                    location: "Dubai",
+                                    width: width,
+                                    height: height,
+                                    image: 'assets/images/7.jpg'),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
